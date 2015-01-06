@@ -87,7 +87,6 @@ USE_OPENGL_RENDERER := true
 VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
 TARGET_USES_ION := true
-TARGET_USE_ION_COMPAT := true
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
@@ -117,6 +116,8 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/moto/shamu
 
 # Support Native Layer RF cutback
 BOARD_USES_CUTBACK_IN_RILD := true
+
+$(call ril-set-path-variant,ril-aosp)
 
 BOARD_SEPOLICY_DIRS += \
        device/moto/shamu/sepolicy

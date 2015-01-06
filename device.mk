@@ -133,10 +133,6 @@ PRODUCT_PACKAGES += \
     libqdMetaData
 
 PRODUCT_PACKAGES += \
-    librmnetctl \
-    rmnetcl
-
-PRODUCT_PACKAGES += \
     libc2dcolorconvert \
     libstagefrighthw \
     libOmxCore \
@@ -242,6 +238,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # SIM based FSG loading default enabled
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.fsg_reload_on=1 \
+
+# Allow tethering without provisioning app
+PRODUCT_PROPERTY_OVERRIDES += \
+    net.tethering.noprovisioning=true
 
 # Camera configuration
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
