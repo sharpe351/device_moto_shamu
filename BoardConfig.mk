@@ -110,14 +110,16 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
+ifneq ($(ENABLE_FORCED_ENCRYPTION),true) 
+TARGET_RECOVERY_FSTAB = device/moto/shamu/fstab_nocrypt.shamu
+else
 TARGET_RECOVERY_FSTAB = device/moto/shamu/fstab.shamu
+endif
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/moto/shamu
 
 # Support Native Layer RF cutback
 BOARD_USES_CUTBACK_IN_RILD := true
-
-$(call ril-set-path-variant,ril-aosp)
 
 BOARD_SEPOLICY_DIRS += \
        device/moto/shamu/sepolicy
