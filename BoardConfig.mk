@@ -87,7 +87,6 @@ USE_OPENGL_RENDERER := true
 VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
 TARGET_USES_ION := true
-TARGET_USE_ION_COMPAT := true
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
@@ -111,7 +110,11 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
+ifneq ($(ENABLE_FORCED_ENCRYPTION),true) 
+TARGET_RECOVERY_FSTAB = device/moto/shamu/fstab_nocrypt.shamu
+else
 TARGET_RECOVERY_FSTAB = device/moto/shamu/fstab.shamu
+endif
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/moto/shamu
 

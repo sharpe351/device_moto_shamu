@@ -18,13 +18,16 @@
 # are also specific to shamu devices
 #
 # Everything in this directory will become public
-
+THE_FSTAB := fstab_nocrypt.shamu
+ifeq ($(ENABLE_FORCED_ENCRYPTION),true)
+THE_FSTAB := fstab.shamu
+endif
 
 PRODUCT_COPY_FILES += \
     device/moto/shamu/init.shamu.rc:root/init.shamu.rc \
     device/moto/shamu/init.shamu.power.rc:root/init.shamu.power.rc \
     device/moto/shamu/init.shamu.usb.rc:root/init.shamu.usb.rc \
-    device/moto/shamu/fstab.shamu:root/fstab.shamu \
+    device/moto/shamu/$(THE_FSTAB):root/fstab.shamu \
     device/moto/shamu/ueventd.shamu.rc:root/ueventd.shamu.rc
 
 # Input device files for shamu
@@ -238,6 +241,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # SIM based FSG loading default enabled
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.fsg_reload_on=1 \
+
+# Allow tethering without provisioning app
+PRODUCT_PROPERTY_OVERRIDES += \
+    net.tethering.noprovisioning=true
 
 # Camera configuration
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
