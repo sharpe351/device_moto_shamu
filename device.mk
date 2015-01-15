@@ -28,13 +28,21 @@ PRODUCT_COPY_FILES += \
     device/moto/shamu/init.shamu.power.rc:root/init.shamu.power.rc \
     device/moto/shamu/init.shamu.usb.rc:root/init.shamu.usb.rc \
     device/moto/shamu/$(THE_FSTAB):root/fstab.shamu \
-    device/moto/shamu/ueventd.shamu.rc:root/ueventd.shamu.rc
+    device/moto/shamu/ueventd.shamu.rc:root/ueventd.shamu.rc \
+    device/moto/shamu/init.performance_profiles.rc:root/init.performance_profiles.rc
 
 # Input device files for shamu
 PRODUCT_COPY_FILES += \
     device/moto/shamu/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
     device/moto/shamu/apq8084-taiko-tfa9890_stereo_co_Button_Jack.kl:system/usr/keylayout/apq8084-taiko-tfa9890_stereo_co_Button_Jack.kl \
-	device/moto/shamu/atmel_mxt_ts.idc:system/usr/idc/atmel_mxt_ts.idc
+    device/moto/shamu/atmel_mxt_ts.idc:system/usr/idc/atmel_mxt_ts.idc
+
+# OK Google everywhere
+PRODUCT_COPY_FILES += \
+    device/moto/shamu/okgoogle/com.motorola.triggerenroll.xml:system/etc/permissions/com.motorola.triggerenroll.xml \
+    device/moto/shamu/okgoogle/libtrainingcheck.so:system/lib/libtrainingcheck.so \
+    device/moto/shamu/okgoogle/TriggerEnroll.apk:system/priv-app/TriggerEnroll/TriggerEnroll.apk \
+    device/moto/shamu/okgoogle/TriggerTrainingService.apk:system/priv-app/TriggerTrainingService/TriggerTrainingService.apk
 
 PRODUCT_COPY_FILES += \
     device/moto/shamu/audio_policy.conf:system/etc/audio_policy.conf \
@@ -170,6 +178,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     fmas.spkr_2ch=35,25 \
     fmas.spkr_angles=10 \
     fmas.spkr_sgain=0 \
+    lpa.decode=false \
+    lpa.releaselock=false \
+    lpa.use-stagefright=false \
+    tunnel.decode=false
 
 PRODUCT_PACKAGES += \
     libqomx_core \
@@ -236,6 +248,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # LTE, CDMA, GSM/WCDMA
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_network=10 \
+    ro.telephony.get_imsi_from_sim=true \
     telephony.lteOnCdmaDevice=1
 
 # SIM based FSG loading default enabled
@@ -283,6 +296,11 @@ PRODUCT_PACKAGES += \
     nfc_nci.bcm2079x.default \
     NfcNci \
     Tag
+
+# OK GOOGLE STUFFS
+PRODUCT_PACKAGES += \
+    libsoundtrigger \
+    libsroundtriggerservice
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \

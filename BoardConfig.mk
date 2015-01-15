@@ -28,20 +28,24 @@ TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 TARGET_NO_BOOTLOADER := true
 
 # Inline kernel building
-TARGET_KERNEL_CONFIG := shamu_defconfig
+TARGET_KERNEL_CONFIG := franco_defconfig
 TARGET_KERNEL_SOURCE := kernel/moto/shamu
 TARGET_GCC_VERSION_ARM := 4.9-sm
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := 4.9-sm
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
+
+# Custom Toolchain Flags
+TARGET_KERNEL_TOOLCHAIN_VERSION := linaro-4.8
+TARGET_KERNEL_USE_AOSP_TOOLCHAIN := false
 
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE :=  2048
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
 
-BOARD_KERNEL_CMDLINE += vmalloc=340M
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.selinux=permissive androidboot.console=ttyHSL0 androidboot.hardware=shamu msm_rtb.filter=0x37 ehci-hcd.park=3 utags.blkdev=/dev/block/platform/msm_sdcc.1/by-name/utags utags.backup=/dev/block/platform/msm_sdcc.1/by-name/utagsBackup coherent_pool=8M
 
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=shamu msm_rtb.filter=0x37 ehci-hcd.park=3 utags.blkdev=/dev/block/platform/msm_sdcc.1/by-name/utags utags.backup=/dev/block/platform/msm_sdcc.1/by-name/utagsBackup coherent_pool=8M
+BOARD_KERNEL_CMDLINE += vmalloc=340M
 
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset BOARD_RAMDISK_OFFSET --tags_offset BOARD_KERNEL_TAGS_OFFSET
 
@@ -136,6 +140,7 @@ BOARD_SEPOLICY_UNION += \
         file.te \
         gsiffd.te \
         irsc_util.te \
+        kernel.te \
         mdm_helper.te \
         mediaserver.te \
         mpdecision.te \
@@ -150,6 +155,7 @@ BOARD_SEPOLICY_UNION += \
         surfaceflinger.te \
         system_app.te \
         system_server.te \
+        tap2wake_dev.te \
         tcmd.te \
         tee.te \
         te_macros \
@@ -183,5 +189,8 @@ EXTENDED_FONT_FOOTPRINT := true
 
 # Enable workaround for slow rom flash
 BOARD_SUPPRESS_SECURE_ERASE := true
+
+# CMHW
+BOARD_HARDWARE_CLASS := device/moto/shamu/cmhw
 
 -include vendor/motorola/shamu/BoardConfigVendor.mk
