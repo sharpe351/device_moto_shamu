@@ -30,6 +30,8 @@ TARGET_NO_BOOTLOADER := true
 # Inline kernel building
 TARGET_KERNEL_CONFIG := franco_defconfig
 TARGET_KERNEL_SOURCE := kernel/moto/shamu
+TARGET_GCC_VERSION_ARM := 4.9-sm
+TARGET_KERNEL_CUSTOM_TOOLCHAIN := 4.9-sm
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
 
 # Custom Toolchain Flags
